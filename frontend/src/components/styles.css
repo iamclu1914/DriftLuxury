@@ -2,9 +2,9 @@
 :root {
   /* Elegant Luxury Color Palette */
   --color-neutral-50: #f8fafc;
-  --color-neutral-100: #e2e8f0;
-  --color-neutral-200: #cbd5e1;
-  --color-neutral-300: #94a3b8;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
   --color-neutral-400: #64748b;
   --color-neutral-500: #475569;
   --color-neutral-600: #334155;
@@ -27,23 +27,26 @@
   --color-surface-hover: #2D3748;
   --color-surface-variant: #111827;
   --color-background: #0F172A;
-  --color-text: var(--color-neutral-100);
-  --color-text-secondary: var(--color-neutral-300);
-  --color-text-muted: var(--color-neutral-400);
+  --color-text: #ffffff;
+  --color-text-secondary: #e2e8f0;
+  --color-text-muted: #cbd5e1;
   
   /* Keep dark mode variables for compatibility */
   --color-dark-primary: var(--color-gold);
   --color-dark-primary-hover: var(--color-gold-light);
   --color-dark-secondary: var(--color-secondary);
   --color-dark-secondary-hover: var(--color-secondary-hover);
+  
+  /* Button size control */
+  
   --color-dark-accent: var(--color-gold-light);
   --color-dark-surface: var(--color-surface);
   --color-dark-surface-hover: var(--color-surface-hover);
   --color-dark-surface-variant: var(--color-surface-variant);
   --color-dark-background: var(--color-background);
-  --color-dark-text: var(--color-text);
-  --color-dark-text-secondary: var(--color-text-secondary);
-  --color-dark-text-tertiary: #9CA3AF;
+  --color-dark-text: #ffffff;
+  --color-dark-text-secondary: #e2e8f0;
+  --color-dark-text-tertiary: #cbd5e1;
 }
 
 /* Animation for mobile menu slide-in */
@@ -332,4 +335,265 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(212, 175, 55, 0.5);
+}
+
+/* Responsive styles for TripMode component */
+@media (max-width: 768px) {
+  /* Make search container more compact */
+  .TripMode-container .glassmorphism {
+    padding: 1rem !important;
+    border-radius: 0.75rem !important;
+  }
+  
+  /* Reduce spacing between form elements */
+  .TripMode-container .space-y-8 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Make form headers smaller */
+  .TripMode-container h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Make paragraph text smaller */
+  .TripMode-container p {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Make buttons more compact */
+  .TripMode-container button {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Adjust grid layouts for form fields */
+  .TripMode-container .grid {
+    gap: 0.5rem !important;
+  }
+  
+  /* Make form inputs smaller */
+  .TripMode-container input,
+  .TripMode-container select {
+    padding: 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Force small size for submit button in loading state, based on observed HTML */
+.submit-button.loading {
+  padding: 0.5rem 1rem !important; /* Drastically reduce padding */
+  min-height: 40px !important;
+  max-height: 40px !important;
+  overflow: hidden !important;
+  display: inline-flex !important; /* Helps control inner content size */
+  align-items: center !important;
+  justify-content: center !important;
+  text-indent: -9999px; /* Hide original text if any */
+}
+
+/* Target the large inner div observed in the problematic HTML */
+.submit-button.loading > div[class*="py-16"] {
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+  transform: scale(0.75);
+  margin: 0 auto !important; /* Center the scaled div if it's the only child */
+}
+
+.submit-button.loading span {
+  font-size: 0.875rem !important; /* Smaller text */
+  margin-left: 0.25rem !important;
+  text-indent: 0; /* Unhide this span */
+  display: block; /* Ensure it's visible */
+}
+
+/* Ensure the spinner itself is small if it's directly inside */
+.submit-button.loading .animate-spin {
+  width: 1rem !important;   /* 16px */
+  height: 1rem !important;  /* 16px */
+  border-width: 2px !important;
+  margin: 0 !important; /* Remove any extra margin */
+}
+
+/* If the 'PROCESSING...' text is a direct child span */
+.submit-button.loading > span {
+    text-indent: 0;
+    font-size: 0.875rem !important;
+}
+
+/* Utility class to hide scrollbars while allowing scrolling */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Improved tab navigation */
+.tab-scroll-container {
+  position: relative;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  width: 100%;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.tab-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.tab-navigation {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  padding: 2px;
+  width: 100%; /* Fill the container */
+  justify-content: space-between; /* Distribute space evenly */
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-family: var(--font-serif);
+  border: 1px solid;
+  min-width: max-content;
+  flex-shrink: 0; /* Prevent tabs from shrinking */
+  flex: 1; /* Make tabs take equal space */
+  justify-content: center; /* Center content */
+  max-width: 25%; /* Limit maximum width */
+}
+
+.tab-active {
+  background: linear-gradient(to right, var(--color-gold-dark), var(--color-gold));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 6px 8px;
+}
+
+.tab-inactive {
+  border-color: rgba(75, 85, 99, 0.5);
+  color: var(--color-text-secondary);
+  padding: 6px 8px;
+}
+
+.tab-inactive:hover {
+  color: var(--color-gold);
+}
+
+.tab-icon {
+  margin-right: 6px;
+}
+
+.tab-count {
+  background-color: rgba(31, 41, 55, 0.6);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  padding: 1px 5px;
+  margin-left: 4px;
+}
+
+.tab-scroll-indicator {
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--color-gold-dark), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tab-scroll-container:hover + .tab-scroll-indicator,
+.tab-scroll-container:focus-within + .tab-scroll-indicator {
+  opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+  .tab-active {
+    padding: 4px 6px;
+    font-size: 0.75rem;
+  }
+  
+  .tab-inactive {
+    padding: 4px 5px;
+    font-size: 0.75rem;
+  }
+  
+  .tab-icon {
+    margin-right: 3px;
+  }
+  
+  .tab-navigation {
+    gap: 4px;
+  }
+  
+  .tab-count {
+    padding: 0px 3px;
+    font-size: 0.65rem;
+    margin-left: 3px;
+  }
+}
+
+/* Mobile-friendly card adjustments */
+@media (max-width: 640px) {
+  .glassmorphism {
+    padding: 0.75rem !important;
+    max-width: 100% !important;
+    overflow: hidden;
+  }
+  
+  /* Ensure text doesn't overflow on small screens */
+  h5, p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+  }
+}
+
+/* Minimal loader component - completely independent styling */
+.mini-loader-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, var(--color-gold-dark), var(--color-gold));
+  color: #1a1a1a;
+  border-radius: 9999px;
+  padding: 0.375rem 0.75rem;
+  height: 32px;
+  max-height: 32px;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  opacity: 0.85;
+  max-width: 180px;
+  overflow: hidden;
+}
+
+.mini-loader-spinner {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid transparent;
+  border-top-color: #1a1a1a;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  animation: mini-spin 0.8s linear infinite;
+}
+
+.mini-loader-text {
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+@keyframes mini-spin {
+  to { transform: rotate(360deg); }
 }

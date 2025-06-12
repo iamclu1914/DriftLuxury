@@ -34,8 +34,7 @@ const EnhancedItinerary = ({ itinerary = {}, nearbyPlaces = [] }) => {
     { id: 'restaurants', label: 'Dining', icon: '🍽️', count: categorizedPlaces.restaurants.length },
     { id: 'attractions', label: 'Attractions', icon: '🎭', count: categorizedPlaces.attractions.length },
     { id: 'shopping', label: 'Shopping', icon: '🛍️', count: categorizedPlaces.shopping.length },
-    { id: 'entertainment', label: 'Entertainment', icon: '🎪', count: categorizedPlaces.entertainment.length },
-    { id: 'all', label: 'All', icon: '🗺️', count: nearbyPlaces.length },
+    { id: 'entertainment', label: 'Fun', icon: '🎪', count: categorizedPlaces.entertainment.length },
   ];
 
   const getPlaceIcon = (types = []) => {
@@ -74,12 +73,12 @@ const EnhancedItinerary = ({ itinerary = {}, nearbyPlaces = [] }) => {
           </div>
         )}
         {itinerary.activities.map((a, idx) => (
-          <div key={idx} className="glassmorphism p-6 rounded-xl border border-gray-700/50 flex space-x-4">
-            <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-gold-dark)] to-[var(--color-gold)] text-white font-bold">{idx + 1}</div>
+          <div key={idx} className="glassmorphism p-4 sm:p-6 rounded-xl border border-gray-700/50 flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 overflow-hidden">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-gradient-to-br from-[var(--color-gold-dark)] to-[var(--color-gold)] text-white font-bold">{idx + 1}</div>
             <div className="flex-1">
               <h5 className="font-serif text-xl text-[var(--color-text)] mb-2">{a.title}</h5>
               <p className="text-[var(--color-text-secondary)] mb-3">{a.description}</p>
-              <div className="flex flex-wrap gap-2 text-sm font-medium">
+              <div className="flex flex-wrap gap-2 text-xs sm:text-sm font-medium">
                 <span className="bg-gray-800/50 px-2 py-1 rounded">📍 {a.location}</span>
                 <span className="bg-gray-800/50 px-2 py-1 rounded">⏱️ {a.duration_minutes} min</span>
                 <span className="bg-gray-800/50 px-2 py-1 rounded">💰 {a.estimated_cost}</span>
@@ -101,12 +100,12 @@ const EnhancedItinerary = ({ itinerary = {}, nearbyPlaces = [] }) => {
       );
     }
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {places.map((p, i) => (
           <div key={p.place_id || `${p.name}-${i}`}
                onClick={() => { setSelectedPlace(p); setIsModalOpen(true); }}
-               className="glassmorphism p-4 rounded-xl border border-gray-700/50 hover:shadow-modern-lg transition-all cursor-pointer">
-            <div className="w-full h-32 bg-gray-800/40 rounded-lg flex items-center justify-center mb-3 overflow-hidden">
+               className="glassmorphism p-3 sm:p-4 rounded-xl border border-gray-700/50 hover:shadow-modern-lg transition-all cursor-pointer max-w-full">
+            <div className="w-full h-24 sm:h-32 bg-gray-800/40 rounded-lg flex items-center justify-center mb-2 sm:mb-3 overflow-hidden">
               {p.photos?.[0]?.url ? (
                 <img src={p.photos[0].url} alt={p.name} className="w-full h-full object-cover" />
               ) : (
@@ -153,19 +152,24 @@ const EnhancedItinerary = ({ itinerary = {}, nearbyPlaces = [] }) => {
       <div className="absolute -bottom-10 -left-10 w-56 h-56 bg-gradient-to-tr from-[var(--color-accent)] to-[var(--color-accent-light)] opacity-10 rounded-full blur-3xl"></div>
 
       {/* Tabs */}
-      <nav className="relative z-10 flex overflow-x-auto pb-4 space-x-4">
-        {TABS.map((t) => (
-          <button key={t.id}
-                  onClick={() => setActiveTab(t.id)}
-                  className={`flex items-center space-x-2 px-4 py-2.5 rounded-md border transition-all font-serif whitespace-nowrap ${activeTab === t.id ? 'bg-gradient-to-r from-[var(--color-gold-dark)] to-[var(--color-gold)] text-white shadow-lg' : 'border-gray-700/50 text-[var(--color-text-secondary)] hover:text-[var(--color-gold)]'}`}>
-            <span>{t.icon}</span>
-            <span>{t.label}</span>
-            {t.count > 0 && (
-              <span className="ml-1 bg-gray-800/60 text-xs px-1.5 py-0.5 rounded-full">{t.count}</span>
-            )}
-          </button>
-        ))}
-      </nav>
+      <div className="relative z-10 mb-6 w-full">
+        <div className="tab-scroll-container">
+          <nav className="tab-navigation">
+            {TABS.map((t) => (
+              <button key={t.id}
+                      onClick={() => setActiveTab(t.id)}
+                      className={`tab-button ${activeTab === t.id ? 'tab-active' : 'tab-inactive'}`}>
+                <span className="tab-icon">{t.icon}</span>
+                <span className="tab-label">{t.label}</span>
+                {t.count > 0 && (
+                  <span className="tab-count">{t.count}</span>
+                )}
+              </button>
+            ))}
+          </nav>
+        </div>
+        <div className="tab-scroll-indicator"></div>
+      </div>
 
       {/* Content */}
       <div className="relative z-10 mt-6">{getTabContent()}</div>
@@ -183,7 +187,7 @@ const EnhancedItinerary = ({ itinerary = {}, nearbyPlaces = [] }) => {
             </div>
             <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
               {selectedPlace.rating && (
-                <div className="flex items-center space-x-2 bg-yellow-100/10 text-yellow-400 px-3 py-2 rounded-md inline-flex">
+                <div className="items-center space-x-2 bg-yellow-100/10 text-yellow-400 px-3 py-2 rounded-md inline-flex">
                   <span>⭐</span><span className="font-medium">{selectedPlace.rating}</span>
                   {selectedPlace.user_ratings_total && <span>({selectedPlace.user_ratings_total})</span>}
                 </div>
