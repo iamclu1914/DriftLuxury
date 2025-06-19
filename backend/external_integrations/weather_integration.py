@@ -114,7 +114,7 @@ class WeatherIntegration:
             raise Exception(f"Failed to fetch weather forecast: {str(e)}")
 
     def _parse_current_weather(self, data: Dict[str, Any]) -> WeatherData:
-        """Parse current weather data from API response"""
+        """Parse current weather data from API response and convert temperature to Fahrenheit"""
         try:
             current = data.get('current_weather', {})
             hourly = data.get('hourly', {})
@@ -133,10 +133,12 @@ class WeatherIntegration:
                 return values[current_index] if current_index < len(values) else default
             
             weather_code = int(current.get('weathercode', 0))
-            
+            # Convert Celsius to Fahrenheit
+            temp_c = current.get('temperature', 0)
+            temp_f = temp_c * 9.0 / 5.0 + 32.0
             return WeatherData(
-                temperature=current.get('temperature', 0),
-                feels_like=current.get('temperature', 0),  # Open-Meteo doesn't provide feels_like
+                temperature=round(temp_f, 1),
+                feels_like=round(temp_f, 1),  # Open-Meteo doesn't provide feels_like
                 humidity=get_hourly_value('relative_humidity_2m', 50),
                 pressure=get_hourly_value('pressure_msl', 1013.25),
                 visibility=get_hourly_value('visibility', 10000) / 1000,  # Convert to km
@@ -152,8 +154,8 @@ class WeatherIntegration:
             logger.error(f"Error parsing current weather: {e}")
             # Return default weather data
             return WeatherData(
-                temperature=20.0,
-                feels_like=20.0,
+                temperature=68.0,  # 20C in F
+                feels_like=68.0,
                 humidity=50,
                 pressure=1013.25,
                 visibility=10.0,

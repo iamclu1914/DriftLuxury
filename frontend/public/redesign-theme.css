@@ -3,6 +3,10 @@
   --color-secondary: #E0E0E0; /* Off-white */
   --color-accent: #BFA054;  /* Muted Gold */
   --color-accent-light: #D4B95B;  /* Lighter Gold */
+  --color-accent-dark: #9A7A32;  /* Darker Gold */
+  --color-gold: #BFA054;  /* Gold */
+  --color-gold-light: #D4B95B;  /* Light Gold */
+  --color-gold-dark: #9A7A32;  /* Dark Gold */
   --color-background: #121212; /* Dark Charcoal */
   --color-surface: #1E1E1E; /* Slightly lighter charcoal */
   --color-text: #E0E0E0; /* Off-white text */

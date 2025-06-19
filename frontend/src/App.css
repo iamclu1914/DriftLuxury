@@ -38,6 +38,16 @@ h1, h2, h3, h4, h5, h6 {
     color: transparent;
 }
 
+/* Animation for header effects */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.3; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
 /* Advanced Glassmorphism Effects */
 .glass {
     background: rgba(31, 41, 55, 0.6);

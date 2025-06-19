@@ -160,19 +160,25 @@ class GooglePlacesIntegration:
         
         # Process photos
         photos = []
-        if include_details:
-            # Handle both 'photos' (from search) and 'photo' (from place details)
-            photo_data = place_data.get('photos', []) or place_data.get('photo', [])
-            if photo_data:
-                for photo in photo_data[:6]:  # Limit to 6 photos
-                    photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo['photo_reference']}&key={self.api_key}"
-                    photos.append({
-                        'photo_reference': photo['photo_reference'],
-                        'url': photo_url,
-                        'width': photo.get('width'),
-                        'height': photo.get('height'),
-                        'html_attributions': photo.get('html_attributions', [])
-                    })
+        if 'photos' in place_data and place_data['photos']:
+            for photo in place_data['photos'][:1]:  # Use the first photo for main image
+                photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference={photo['photo_reference']}&key={self.api_key}"
+                photos.append({
+                    'photo_reference': photo['photo_reference'],
+                    'url': photo_url,
+                    'width': photo.get('width'),
+                    'height': photo.get('height'),
+                    'html_attributions': photo.get('html_attributions', [])
+                })
+        # Fallback if no photo
+        if not photos:
+            photos = [{
+                'url': 'https://via.placeholder.com/300x200?text=No+Image',
+                'photo_reference': None,
+                'width': 300,
+                'height': 200,
+                'html_attributions': []
+            }]
         
         # Handle reviews (both 'reviews' from search and 'review' from place details)
         reviews = place_data.get('reviews', []) or place_data.get('review', [])

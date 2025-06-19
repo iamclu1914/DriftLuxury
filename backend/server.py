@@ -7,11 +7,12 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 import uuid
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 
-# Load environment variables from .env file
-load_dotenv()
+# Construct the absolute path to the .env file
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path=dotenv_path)
 
 # Add current directory to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -39,6 +40,8 @@ from external_integrations.weather_integration import (
     WeatherData,
     WeatherForecast
 )
+from external_integrations.foursquare_integration import foursquare_integration
+from external_integrations.eventbrite_integration import eventbrite_integration
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -436,41 +439,40 @@ async def create_here_now_plan(request: HereNowRequest):
     try:
         # Step 1: Get location coordinates
         location_info = await google_places_integration.geocode_location(request.location)
-        
+        lat = location_info.coordinates['lat']
+        lon = location_info.coordinates['lng']
         # Step 2: Get current weather
-        weather_data = await weather_integration.get_current_weather(
-            location_info.coordinates['lat'],
-            location_info.coordinates['lng']
-        )
-        
-        # Step 3: Find nearby places
-        nearby_places = await google_places_integration.get_nearby_places(
-            latitude=location_info.coordinates['lat'],
-            longitude=location_info.coordinates['lng'],
-            radius=3000  # Increased radius for more options
-        )
-        
-        # Step 4: Create enhanced prompt with real venue data
-        real_venues_text = "\n".join([
-            f"- {place.name} ({place.types[0] if place.types else 'venue'}) - {place.cost_estimate} - Rating: {place.rating or 'N/A'} - Address: {place.formatted_address or place.vicinity or 'Address not available'}"
-            for place in nearby_places[:8]  # Use top 8 for AI prompt
-        ])
-        
-        # Step 5: Generate AI itinerary with real venues
-        ai_itinerary = await openai_integration.generate_itinerary(
+        weather_data = await weather_integration.get_current_weather(lat, lon)
+        # Step 3: Get data for each category using exact coordinates
+        dining = await foursquare_integration.get_restaurants_with_photos(lat, lon, limit=5)
+        events = await eventbrite_integration.get_local_events(lat, lon, limit=5)
+        attractions = await google_places_integration.get_nearby_places(lat, lon, place_type='tourist_attraction', radius=5000)
+        fun = await google_places_integration.get_nearby_places(lat, lon, place_type='amusement_park', radius=5000)
+
+        # Step 4: Generate an overview with OpenAI
+        overview_prompt = f"Create a short, exciting overview for a {request.duration_hours}-hour trip in {request.location} with a {request.mood} mood and a {request.budget} budget. The weather is {weather_data.description} at {weather_data.temperature}°F."
+        overview = await openai_integration.generate_itinerary(
             location=request.location,
             mood=request.mood,
             budget=request.budget,
             duration_hours=request.duration_hours,
-            real_venues=real_venues_text
+            real_venues=overview_prompt
         )
+
+        # Step 5: Structure the itinerary
+        structured_itinerary = {
+            "overview": overview,
+            "dining": dining,
+            "events": events,
+            "attractions": attractions,
+            "fun": fun
+        }
         
         return {
             "success": True,
             "location_info": location_info,
             "weather": weather_data,
-            "nearby_places": nearby_places,
-            "ai_itinerary": ai_itinerary
+            "itinerary": structured_itinerary
         }
         
     except Exception as e:
@@ -481,63 +483,83 @@ async def create_here_now_plan(request: HereNowRequest):
 @app.post("/api/trip/plan-and-book")
 async def plan_and_book_trip(request: TripPlanRequest):
     try:
-        # Generate comprehensive trip plan
+        # 1) Destination details
         destination_info = await google_places_integration.geocode_location(request.destination)
-        
-        # Get places for the destination
+
+        # 2) Nearby places (once for entire trip)
         places = await google_places_integration.get_nearby_places(
             latitude=destination_info.coordinates['lat'],
             longitude=destination_info.coordinates['lng'],
             radius=5000
         )
-        
-        # Generate AI itinerary for the trip
-        itinerary = await openai_integration.generate_itinerary(
-            location=request.destination,
-            mood=request.preferences.get('mood', 'adventurous'),
-            budget='medium',
-            duration_hours=24  # Full day planning
-        )
-        
-        # Search for flights if origin is provided
+
+        # 3) Create day-by-day itineraries with OpenAI
+        start_dt = datetime.strptime(request.departure_date, "%Y-%m-%d")
+        end_dt = datetime.strptime(request.return_date or request.departure_date, "%Y-%m-%d")
+        trip_days = (end_dt - start_dt).days + 1
+
+        itineraries = []
+        for day_offset in range(trip_days):
+            current_date = start_dt + timedelta(days=day_offset)
+            try:
+                day_itinerary = await openai_integration.generate_itinerary(
+                    location=request.destination,
+                    mood=request.preferences.get("mood", "adventurous"),
+                    budget=request.preferences.get("budget", "medium"),
+                    duration_hours=12  # assume 12hr of activities per day
+                )
+            except Exception as e:
+                logger.warning(f"OpenAI itinerary generation failed for day {day_offset+1}: {e}")
+                day_itinerary = None
+
+            itineraries.append({
+                "day": day_offset + 1,
+                "date": current_date.strftime("%Y-%m-%d"),
+                "itinerary": day_itinerary
+            })
+
+        # 4) Flights – origin required
         flights = []
-        if request.preferences.get('origin'):
+        origin = request.preferences.get("origin")
+        if origin:
             try:
                 flight_request = FlightSearchRequest(
-                    origin=request.preferences['origin'],
+                    origin=origin,
                     destination=request.destination,
                     departure_date=request.departure_date,
                     return_date=request.return_date,
-                    adults=request.travelers.get('adults', 1)
+                    adults=request.travelers.get("adults", 1)
                 )
                 flights = await amadeus_integration.search_flights(flight_request)
             except Exception as e:
                 logger.warning(f"Flight search failed in trip planning: {e}")
-        
-        # Search for hotels
+
+        # 5) Hotels (optional)
         hotels = []
         try:
             hotel_request = HotelSearchRequest(
                 location=request.destination,
                 check_in=request.departure_date,
                 check_out=request.return_date,
-                guests=request.travelers.get('adults', 1)
+                guests=request.travelers.get("adults", 1)
             )
             hotels = await amadeus_integration.search_hotels(hotel_request)
         except Exception as e:
             logger.warning(f"Hotel search failed in trip planning: {e}")
-        
+
         return {
             "success": True,
-            "itinerary": itinerary,
+            "itineraries": itineraries,
+            # keep original key for backward-compat
+            "itinerary": itineraries[0]["itinerary"] if itineraries else None,
             "places": places,
             "flights": flights,
             "hotels": hotels,
             "destination_info": destination_info,
             "summary": {
                 "total_cost": f"${request.budget:.0f}",
-                "duration": f"{len(request.departure_date.split('-')[0])} days",
-                "activities_count": len(itinerary.activities) if hasattr(itinerary, 'activities') else 0
+                "duration": f"{trip_days} day{'s' if trip_days>1 else ''}",
+                "activities_count": sum(len(d['itinerary'].activities) for d in itineraries if d.get('itinerary') and hasattr(d['itinerary'], 'activities'))
             }
         }
         

@@ -1,0 +1,198 @@
+
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>DRIFT Documentation - api</title>
+                <style>
+                    body {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                        max-width: 900px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        background-color: #f9f9f9;
+                    }
+                    h1, h2, h3, h4, h5, h6 {
+                        color: #1a2942;
+                    }
+                    code, pre {
+                        font-family: Consolas, Monaco, 'Andale Mono', monospace;
+                        background-color: #f5f5f5;
+                        padding: 2px 5px;
+                        border-radius: 4px;
+                        font-size: 0.9em;
+                    }
+                    pre {
+                        padding: 15px;
+                        overflow: auto;
+                    }
+                    a {
+                        color: #1e40af;
+                        text-decoration: none;
+                    }
+                    a:hover {
+                        text-decoration: underline;
+                    }
+                    table {
+                        border-collapse: collapse;
+                        width: 100%;
+                    }
+                    th, td {
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                    }
+                    tr:nth-child(even) {
+                        background-color: #f2f2f2;
+                    }
+                    th {
+                        padding-top: 12px;
+                        padding-bottom: 12px;
+                        text-align: left;
+                        background-color: #1a2942;
+                        color: white;
+                    }
+                    .navbar {
+                        background-color: #1a2942;
+                        padding: 10px 20px;
+                        margin-bottom: 20px;
+                        border-radius: 8px;
+                    }
+                    .navbar a {
+                        color: white;
+                        margin-right: 15px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="navbar">
+                    <a href="index.html">Home</a>
+                    <a href="overview.html">Overview</a>
+                    <a href="components.html">Components</a>
+                    <a href="api.html">API</a>
+                </div>
+                <h1>API Endpoints</h1>
+<h2>/api/ai/generate-itinerary</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>generate_itinerary</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/ai/generate-journal-recap</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>generate_journal_recap</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/amadeus/search-airports</h2>
+<h3>GET</h3>
+<p><strong>Function:</strong> <code>search_airports</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/amadeus/search-cities</h2>
+<h3>GET</h3>
+<p><strong>Function:</strong> <code>search_cities</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/flights/flexible-search</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>flexible_flight_search</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/flights/search</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>search_flights</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/flights/search-smart</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>search_smart_flights</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/here-now/plan</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>create_here_now_plan</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/hotels/search</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>search_hotels</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/locations/airports</h2>
+<h3>GET</h3>
+<p><strong>Function:</strong> <code>get_airports_by_keyword</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/locations/cities</h2>
+<h3>GET</h3>
+<p><strong>Function:</strong> <code>get_cities_by_keyword</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/places/details</h2>
+<h3>GET</h3>
+<p><strong>Function:</strong> <code>get_place_details</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/places/geocode</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>geocode_location</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/places/nearby</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>get_nearby_places</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/places/search</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>search_places</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/status</h2>
+<h3>GET</h3>
+<p><strong>Function:</strong> <code>get_status</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>create_status_check</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/trip/plan-and-book</h2>
+<h3>POST</h3>
+<p><strong>Function:</strong> <code>plan_and_book_trip</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/weather/current</h2>
+<h3>GET</h3>
+<p><strong>Function:</strong> <code>get_current_weather</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+<h2>/api/weather/forecast</h2>
+<h3>GET</h3>
+<p><strong>Function:</strong> <code>get_weather_forecast</code></p>
+<p><strong>Description:</strong> No description</p>
+<p><strong>File:</strong> <code>server.py</code></p>
+<hr />
+            </body>
+            </html>
+            
