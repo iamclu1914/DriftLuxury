@@ -1,0 +1,16 @@
+{
+  "name": "drift-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Root for Drift frontend and backend",
+  "scripts": {
+    "start:backend": "cd backend && pip install -r requirements.txt && python server.py",
+    "start:frontend": "cd frontend && cross-env PORT=3001 npm start",
+    "dev": "concurrently \"npm:start:backend\" \"npm:start:frontend\""
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3"
+  }
+}

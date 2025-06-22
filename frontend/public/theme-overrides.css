@@ -1,0 +1,7 @@
+:root {
+  --color-secondary: #E0E0E0; /* Softer light gray for better blend */
+  --color-background: #121212; /* Dark background matching body gradient */
+  --color-surface: #1E1E1E; /* Darker surface for containers */
+  --color-text: #E0E0E0; /* Light gray text for better contrast */
+  --color-text-secondary: #A0A0A0; /* Medium gray for secondary text */
+}

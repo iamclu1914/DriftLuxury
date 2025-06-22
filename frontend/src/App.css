@@ -1,0 +1,389 @@
+/* DRIFT App - Enhanced Gen Z/Millennial Design System */
+body {
+    margin: 0;
+    font-family: 'Playfair Display', 'Cormorant Garamond', 'Baskerville', 'Times New Roman', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+    min-height: 100vh;
+    line-height: 1.6;
+    color: #e2e8f0; /* Default text color - soft silver */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Enhanced Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+}
+
+/* Gold Gradient Text Effects */
+.gradient-text {
+    background: linear-gradient(135deg, #b3941e 0%, #d4af37 50%, #e6c458 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.gradient-text-blue {
+    background: linear-gradient(135deg, #b3941e 0%, #d4af37 50%, #e6c458 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Animation for header effects */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.3; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Advanced Glassmorphism Effects */
+.glass {
+    background: rgba(31, 41, 55, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(75, 85, 99, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.glass-strong {
+    background: rgba(17, 24, 39, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(75, 85, 99, 0.4);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card {
+    background: rgba(31, 41, 55, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(75, 85, 99, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced Range Slider Styling */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+    height: 8px;
+}
+
+input[type="range"]::-webkit-slider-track {
+    background: linear-gradient(90deg, #b3941e 0%, #d4af37 50%, #e6c458 100%);
+    height: 8px;
+    border-radius: 4px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+input[type="range"]::-webkit-slider-track::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b3941e 0%, #d4af37 100%);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    border: 3px solid #1e293b;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 16px rgba(212, 175, 55, 0.6);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+    transform: scale(1.1);
+}
+
+input[type="range"]::-moz-range-track {
+    background: linear-gradient(90deg, #b3941e 0%, #d4af37 50%, #e6c458 100%);
+    height: 8px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #b3941e 0%, #d4af37 100%);
+    cursor: pointer;
+    border: 3px solid #1e293b;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom Scrollbar with Gold Gradient */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 8px;
+    margin: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #b3941e 0%, #d4af37 100%);
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #d4af37 0%, #e6c458 100%);
+}
+
+/* Advanced Hover Effects */
+.hover-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.hover-glow {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+/* Advanced Loading Animations */
+@keyframes pulse-gradient {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.pulse-gradient {
+    background: linear-gradient(-45deg, #b3941e, #d4af37, #e6c458, #b3941e);
+    background-size: 400% 400%;
+    animation: pulse-gradient 3s ease-in-out infinite;
+}
+
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.float-animation {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Enhanced Button Styles - Gold Luxury Theme */
+.btn-gradient {
+    background: linear-gradient(135deg, #b3941e 0%, #d4af37 50%, #e6c458 100%);
+    border: none;
+    color: #0f172a;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-gradient:hover::before {
+    left: 100%;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+}
+
+/* Enhanced Form Elements - Dark Luxury Theme */
+input[type="text"], 
+input[type="email"], 
+input[type="number"], 
+input[type="date"], 
+select, 
+textarea {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(8px);
+    color: #e2e8f0;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="number"]:focus, 
+input[type="date"]:focus, 
+select:focus, 
+textarea:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.5);
+    outline: none;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+    }
+    
+    .glass, .glass-strong, .glass-card {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    
+    input[type="range"]::-webkit-slider-thumb {
+        height: 28px;
+        width: 28px;
+    }
+    
+    .hover-lift:hover {
+        transform: translateY(-2px) scale(1.01);
+    }
+}
+
+/* Enhanced Text Selection */
+::selection {
+    background: linear-gradient(135deg, #b3941e 0%, #d4af37 100%);
+    color: #0f172a;
+}
+
+::-moz-selection {
+    background: linear-gradient(135deg, #b3941e 0%, #d4af37 100%);
+    color: #0f172a;
+}
+
+/* Focus Visible for Accessibility */
+*:focus-visible {
+    outline: 3px solid #d4af37;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Custom Animation Classes */
+.scale-in {
+    animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced Luxury Card Shadows */
+.shadow-modern {
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.3),
+        0 2px 4px -1px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(212, 175, 55, 0.1);
+}
+
+.shadow-modern-lg {
+    box-shadow: 
+        0 20px 25px -5px rgba(0, 0, 0, 0.3),
+        0 10px 10px -5px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(212, 175, 55, 0.2);
+}
+
+/* Grid pattern for footer background */
+.bg-grid-pattern {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                     linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+}

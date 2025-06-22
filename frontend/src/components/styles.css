@@ -1,0 +1,599 @@
+/* Modern Design System Colors */
+:root {
+  /* Elegant Luxury Color Palette */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #64748b;
+  --color-neutral-500: #475569;
+  --color-neutral-600: #334155;
+  --color-neutral-700: #1e293b;
+  --color-neutral-800: #0f172a;
+  --color-neutral-900: #020617;
+  
+  /* Gold accent */
+  --color-gold: #d4af37;
+  --color-gold-light: #e6c458;
+  --color-gold-dark: #b3941e;
+  
+  /* Main color scheme */
+  --color-primary: var(--color-gold);
+  --color-primary-hover: var(--color-gold-light);
+  --color-secondary: #a78bfa;
+  --color-secondary-hover: #c4b5fd;
+  --color-accent: var(--color-gold-light);
+  --color-surface: #1F2937;
+  --color-surface-hover: #2D3748;
+  --color-surface-variant: #111827;
+  --color-background: #0F172A;
+  --color-text: #ffffff;
+  --color-text-secondary: #e2e8f0;
+  --color-text-muted: #cbd5e1;
+  
+  /* Keep dark mode variables for compatibility */
+  --color-dark-primary: var(--color-gold);
+  --color-dark-primary-hover: var(--color-gold-light);
+  --color-dark-secondary: var(--color-secondary);
+  --color-dark-secondary-hover: var(--color-secondary-hover);
+  
+  /* Button size control */
+  
+  --color-dark-accent: var(--color-gold-light);
+  --color-dark-surface: var(--color-surface);
+  --color-dark-surface-hover: var(--color-surface-hover);
+  --color-dark-surface-variant: var(--color-surface-variant);
+  --color-dark-background: var(--color-background);
+  --color-dark-text: #ffffff;
+  --color-dark-text-secondary: #e2e8f0;
+  --color-dark-text-tertiary: #cbd5e1;
+}
+
+/* Animation for mobile menu slide-in */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.3s ease-out forwards;
+}
+
+/* Animation for popup scale-in */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Animation for pulse effect */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Shimmer effect for cards */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.2) 20%, 
+    rgba(255,255,255,0.5) 60%, 
+    rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Floating animation for cards */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes slow-pan {
+  0% {
+    transform: scale(1.1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.15) translate(-1%, -1%);
+  }
+  100% {
+    transform: scale(1.1) translate(0, 0);
+  }
+}
+
+.animate-slow-pan {
+  animation: slow-pan 20s ease-in-out infinite;
+}
+
+/* Radio and checkbox custom styles */
+.custom-radio-card input[type="radio"],
+.custom-checkbox-card input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.custom-radio-card input[type="radio"] + label,
+.custom-checkbox-card input[type="checkbox"] + label {
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.custom-radio-card input[type="radio"]:checked + label,
+.custom-checkbox-card input[type="checkbox"]:checked + label {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-light);
+}
+
+.custom-radio-card input[type="radio"]:checked + label:before,
+.custom-checkbox-card input[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: var(--color-primary);
+  border-bottom-left-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-radio-card input[type="radio"]:checked + label:after,
+.custom-checkbox-card input[type="checkbox"]:checked + label:after {
+  content: '✓';
+  position: absolute;
+  top: 0;
+  right: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: white;
+  z-index: 1;
+}
+
+/* Range slider styling */
+.modern-range {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.modern-range:hover {
+  opacity: 1;
+}
+
+.modern-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.modern-range::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  background: var(--color-primary-light);
+  box-shadow: 0 0 10px var(--color-primary-light);
+}
+
+.modern-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.modern-range::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  background: var(--color-primary-light);
+  box-shadow: 0 0 10px var(--color-primary-light);
+}
+
+/* Luxury dark glassmorphism */
+.glassmorphism {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25), 0 0 1px rgba(212, 175, 55, 0.2);
+}
+
+.glassmorphism:hover {
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 2px rgba(212, 175, 55, 0.3);
+}
+
+/* Modern card styles */
+.modern-card {
+  transition: all 0.3s ease;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.modern-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+/* Stylish form inputs */
+.stylish-input {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background-color: var(--color-surface-variant);
+  padding: 14px 18px;
+  font-size: 16px;
+}
+
+.stylish-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  outline: none;
+}
+
+/* Custom scrollbar for luxury feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.5);
+}
+
+/* Responsive styles for TripMode component */
+@media (max-width: 768px) {
+  /* Make search container more compact */
+  .TripMode-container .glassmorphism {
+    padding: 1rem !important;
+    border-radius: 0.75rem !important;
+  }
+  
+  /* Reduce spacing between form elements */
+  .TripMode-container .space-y-8 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Make form headers smaller */
+  .TripMode-container h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Make paragraph text smaller */
+  .TripMode-container p {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Make buttons more compact */
+  .TripMode-container button {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.875rem !important;
+  }
+  
+  /* Adjust grid layouts for form fields */
+  .TripMode-container .grid {
+    gap: 0.5rem !important;
+  }
+  
+  /* Make form inputs smaller */
+  .TripMode-container input,
+  .TripMode-container select {
+    padding: 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+}
+
+/* Force small size for submit button in loading state, based on observed HTML */
+.submit-button.loading {
+  padding: 0.5rem 1rem !important; /* Drastically reduce padding */
+  min-height: 40px !important;
+  max-height: 40px !important;
+  overflow: hidden !important;
+  display: inline-flex !important; /* Helps control inner content size */
+  align-items: center !important;
+  justify-content: center !important;
+  text-indent: -9999px; /* Hide original text if any */
+}
+
+/* Target the large inner div observed in the problematic HTML */
+.submit-button.loading > div[class*="py-16"] {
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+  transform: scale(0.75);
+  margin: 0 auto !important; /* Center the scaled div if it's the only child */
+}
+
+.submit-button.loading span {
+  font-size: 0.875rem !important; /* Smaller text */
+  margin-left: 0.25rem !important;
+  text-indent: 0; /* Unhide this span */
+  display: block; /* Ensure it's visible */
+}
+
+/* Ensure the spinner itself is small if it's directly inside */
+.submit-button.loading .animate-spin {
+  width: 1rem !important;   /* 16px */
+  height: 1rem !important;  /* 16px */
+  border-width: 2px !important;
+  margin: 0 !important; /* Remove any extra margin */
+}
+
+/* If the 'PROCESSING...' text is a direct child span */
+.submit-button.loading > span {
+    text-indent: 0;
+    font-size: 0.875rem !important;
+}
+
+/* Utility class to hide scrollbars while allowing scrolling */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Improved tab navigation */
+.tab-scroll-container {
+  position: relative;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  width: 100%;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.tab-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.tab-navigation {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  padding: 2px;
+  width: 100%; /* Fill the container */
+  justify-content: space-between; /* Distribute space evenly */
+}
+
+.tab-button {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-family: var(--font-serif);
+  border: 1px solid;
+  min-width: max-content;
+  flex-shrink: 0; /* Prevent tabs from shrinking */
+  flex: 1; /* Make tabs take equal space */
+  justify-content: center; /* Center content */
+  max-width: 25%; /* Limit maximum width */
+}
+
+.tab-active {
+  background: linear-gradient(to right, var(--color-gold-dark), var(--color-gold));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 6px 8px;
+}
+
+.tab-inactive {
+  border-color: rgba(75, 85, 99, 0.5);
+  color: var(--color-text-secondary);
+  padding: 6px 8px;
+}
+
+.tab-inactive:hover {
+  color: var(--color-gold);
+}
+
+.tab-icon {
+  margin-right: 6px;
+}
+
+.tab-count {
+  background-color: rgba(31, 41, 55, 0.6);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  padding: 1px 5px;
+  margin-left: 4px;
+}
+
+.tab-scroll-indicator {
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--color-gold-dark), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tab-scroll-container:hover + .tab-scroll-indicator,
+.tab-scroll-container:focus-within + .tab-scroll-indicator {
+  opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+  .tab-active {
+    padding: 4px 6px;
+    font-size: 0.75rem;
+  }
+  
+  .tab-inactive {
+    padding: 4px 5px;
+    font-size: 0.75rem;
+  }
+  
+  .tab-icon {
+    margin-right: 3px;
+  }
+  
+  .tab-navigation {
+    gap: 4px;
+  }
+  
+  .tab-count {
+    padding: 0px 3px;
+    font-size: 0.65rem;
+    margin-left: 3px;
+  }
+}
+
+/* Mobile-friendly card adjustments */
+@media (max-width: 640px) {
+  .glassmorphism {
+    padding: 0.75rem !important;
+    max-width: 100% !important;
+    overflow: hidden;
+  }
+  
+  /* Ensure text doesn't overflow on small screens */
+  h5, p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+  }
+}
+
+/* Minimal loader component - completely independent styling */
+.mini-loader-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, var(--color-gold-dark), var(--color-gold));
+  color: #1a1a1a;
+  border-radius: 9999px;
+  padding: 0.375rem 0.75rem;
+  height: 32px;
+  max-height: 32px;
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  opacity: 0.85;
+  max-width: 180px;
+  overflow: hidden;
+}
+
+.mini-loader-spinner {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid transparent;
+  border-top-color: #1a1a1a;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  animation: mini-spin 0.8s linear infinite;
+}
+
+.mini-loader-text {
+  white-space: nowrap;
+  font-size: 0.75rem;
+}
+
+@keyframes mini-spin {
+  to { transform: rotate(360deg); }
+}

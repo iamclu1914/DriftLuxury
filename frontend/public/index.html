@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        
+        <!-- PWA Meta Tags -->
+        <meta name="theme-color" content="#f59e0b" />
+        <meta name="description" content="DRIFT - Your personal travel concierge for curated luxury experiences worldwide" />
+        
+        <!-- iOS Meta Tags -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="DRIFT" />
+        
+        <!-- Android Meta Tags -->
+        <meta name="mobile-web-app-capable" content="yes" />
+        
+        <!-- Manifest -->
+        <link rel="manifest" href="/site.webmanifest" />
+        
+        <!-- Favicon and Icons -->
+        <link rel="icon" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+        
+        <!-- Splash Screen for iOS -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <link rel="apple-touch-startup-image" href="/icons/icon-512x512.png" />
+        
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        
+        <title>DRIFT - Premium Travel Advisor</title>
+        <style>
+            :root {
+                --color-primary: #003580; /* Expedia Blue */
+                --color-secondary: #FFFFFF; /* White */
+                --color-accent: #FF6200;  /* Expedia Orange */
+                --color-accent-light: #FF8C42;  /* Lighter Orange */
+                --color-background: #FFFFFF; /* White background */
+                --color-surface: #F5F9FF; /* Light blue surface */
+                --color-text: #0F1B38; /* Dark blue text */
+                --color-text-secondary: #5B6D8B; /* Medium blue for secondary text */
+                --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+                --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+                --gradient-gold: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+            }
+
+            body {
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                color: var(--color-text);
+                background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+                margin: 0;
+                padding: 0;
+            }
+
+            .container {
+                background: var(--color-surface);
+                border-radius: 1.5rem;
+                box-shadow: var(--shadow-lg);
+                color: var(--color-text);
+                border: 1px solid #4B4B4B;
+                /* Add subtle inner shadow for depth */
+                box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), var(--shadow-lg);
+            }
+
+            .gradient-text {
+                color: var(--color-secondary);
+                font-weight: 800;
+                letter-spacing: -0.02em;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: var(--color-primary);
+                margin-bottom: 2rem;
+                padding-bottom: 1rem;
+                border-bottom: 2px solid #E5E7EB;
+                margin-top: 2.5rem;
+            }
+
+            .form-section {
+                margin-bottom: 3rem;
+                padding: 1.5rem;
+                background: #FFFFFF;
+                border-radius: 1rem;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            }
+
+            .mode-button {
+                padding: 1.25rem 2.5rem;
+                font-size: 1.125rem;
+                font-weight: 600;
+                border-radius: 0.75rem;
+                transition: all 0.3s ease;
+                min-width: 180px;
+                margin: 0 0.5rem;
+            }
+
+            .mode-button.active {
+                background: var(--color-primary);
+                color: var(--color-secondary);
+            }
+
+            .mode-button:not(.active) {
+                background: #F3F4F6;
+                color: var(--color-text);
+            }
+
+            .mode-button:not(.active):hover {
+                background: #E5E7EB;
+            }
+
+            .gradient-divider {
+                background: var(--gradient-gold);
+                height: 2px;
+                opacity: 0.9;
+            }
+
+            .hover-scale {
+                transition: transform 0.2s ease-in-out;
+            }
+
+            .hover-scale:hover {
+                transform: scale(1.02);
+            }
+
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 6px;
+                height: 6px;
+            }
+
+            .custom-scrollbar::-webkit-scrollbar-track {
+                background: var(--color-surface);
+            }
+
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+                background: var(--color-text-secondary);
+                border-radius: 3px;
+            }
+
+            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                background: var(--color-text);
+            }
+
+            /* Button and UI Styles */
+            .btn-primary {
+                background: var(--color-primary);
+                color: var(--color-secondary);
+                font-weight: 600;
+                transition: all 0.3s ease;
+                border: none;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .btn-primary::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+                transform: translateX(-100%);
+                transition: transform 0.6s ease;
+            }
+
+            .btn-primary:hover::after {
+                transform: translateX(100%);
+            }
+
+            .btn-primary:hover {
+                background: var(--color-accent);
+                transform: translateY(-1px);
+                box-shadow: var(--shadow-lg);
+            }
+
+            /* Custom Range Slider */
+            input[type="range"] {
+                -webkit-appearance: none;
+                height: 8px;
+                background: #E5E7EB;
+                border-radius: 4px;
+                background-image: linear-gradient(var(--color-accent), var(--color-accent));
+                background-size: 70% 100%;
+                background-repeat: no-repeat;
+            }
+
+            input[type="range"]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                height: 24px;
+                width: 24px;
+                border-radius: 50%;
+                background: var(--color-accent);
+                cursor: pointer;
+                box-shadow: 0 0 2px 0 #555;
+                transition: background .3s ease-in-out;
+            }
+
+            input[type="range"]::-webkit-slider-thumb:hover {
+                background: var(--color-primary);
+            }
+
+            input[type="range"]::-webkit-slider-runnable-track {
+                -webkit-appearance: none;
+                box-shadow: none;
+                border: none;
+                background: transparent;
+            }
+
+            .selected-option {
+                border-color: var(--color-accent) !important;
+                background: linear-gradient(to bottom right, #FFFFFF, #FAFAFA) !important;
+                box-shadow: 0 0 0 1px var(--color-accent), var(--shadow-md) !important;
+            }
+
+            /* Emergent Badge Styles */
+            .emergent-badge {
+                display: flex;
+                align-items: center;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                text-decoration: none;
+                padding: 6px 10px;
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 12px;
+                z-index: 9999;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+                border-radius: 8px;
+                background-color: #001F3F; /* Navy */
+                border: 1px solid rgba(255, 255, 255, 0.15);
+            }
+
+            .emergent-badge-content {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .emergent-badge-image {
+                width: 20px;
+                height: 20px;
+                margin-right: 8px;
+            }
+
+            .emergent-badge-text {
+                color: #FFFFF0; /* Ivory */
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 12px;
+                align-items: center;
+                margin-bottom: 0;
+            }
+        </style>
+        <link rel="stylesheet" href="theme-overrides.css" />
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root"></div>
+        
+        <!-- Service Worker Registration (disabled in development) -->
+        <!--
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then((registration) => {
+                            console.log('SW registered: ', registration);
+                        })
+                        .catch((registrationError) => {
+                            console.log('SW registration failed: ', registrationError);
+                        });
+                });
+            }
+        </script>
+        -->
+        
+        <!-- Emergent badge removed -->
+        
+        <script>
+            !(function (t, e) {
+                var o, n, p, r;
+                e.__SV ||
+                    ((window.posthog = e),
+                    (e._i = []),
+                    (e.init = function (i, s, a) {
+                        function g(t, e) {
+                            var o = e.split(".");
+                            2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                                (t[e] = function () {
+                                    t.push(
+                                        [e].concat(
+                                            Array.prototype.slice.call(
+                                                arguments,
+                                                0,
+                                            ),
+                                        ),
+                                    );
+                                });
+                        }
+                        ((p = t.createElement("script")).type =
+                            "text/javascript"),
+                            (p.crossOrigin = "anonymous"),
+                            (p.async = !0),
+                            (p.src =
+                                s.api_host.replace(
+                                    ".i.posthog.com",
+                                    "-assets.i.posthog.com",
+                                ) + "/static/array.js"),
+                            (r =
+                                t.getElementsByTagName(
+                                    "script",
+                                )[0]).parentNode.insertBefore(p, r);
+                        var u = e;
+                        for (
+                            void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                                u.people = u.people || [],
+                                u.toString = function (t) {
+                                    var e = "posthog";
+                                    return (
+                                        "posthog" !== a && (e += "." + a),
+                                        t || (e += " (stub)"),
+                                        e
+                                    );
+                                },
+                                u.people.toString = function () {
+                                    return u.toString(1) + ".people (stub)";
+                                },
+                                o =
+                                    "init me ws ys ps bs capture je Di ks register register_once register_for_session unregister unregister_for_session Ps getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Es $s createPersonProfile Is opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Ss debug xs getPageViewId captureTraceFeedback captureTraceMetric".split(
+                                        " ",
+                                    ),
+                                n = 0;
+                            n < o.length;
+                            n++
+                        )
+                            g(u, o[n]);
+                        e._i.push([i, s, a]);
+                    }),
+                    (e.__SV = 1));
+            })(document, window.posthog || []);
+            posthog.init("phc_yJW1VjHGGwmCbbrtczfqqNxgBDbhlhOWcdzcIJEOTFE", {
+                api_host: "https://us.i.posthog.com",
+                person_profiles: "identified_only",
+            });
+        </script>
+    </body>
+</html>

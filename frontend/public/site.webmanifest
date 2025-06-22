@@ -1,0 +1,31 @@
+{
+  "name": "DRIFT - Travel Concierge App",
+  "short_name": "DRIFT",
+  "description": "Your mood-based travel planning companion",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#6366f1",
+  "theme_color": "#8b5cf6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%238b5cf6'/%3E%3Ctext x='256' y='300' text-anchor='middle' fill='white' font-size='200' font-family='sans-serif'%3E🌟%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%238b5cf6'/%3E%3Ctext x='256' y='300' text-anchor='middle' fill='white' font-size='200' font-family='sans-serif'%3E🌟%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["travel", "lifestyle", "navigation"],
+  "lang": "en",
+  "scope": "/",
+  "prefer_related_applications": false
+}
