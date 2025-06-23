@@ -5,7 +5,6 @@ import 'package:flutter_app/screens/city_selector_screen.dart';
 import 'package:flutter_app/screens/concierge_screen.dart';
 import 'package:flutter_app/screens/mood_selector_screen.dart';
 import 'package:flutter_app/screens/recommendation_feed_screen.dart';
-import 'package:flutter_app/screens/trip_mode_screen.dart';
 import 'package:flutter_app/widgets/bottom_navigation.dart';
 
 class MainNavigationScreen extends StatefulWidget {

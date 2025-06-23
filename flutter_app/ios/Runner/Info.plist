@@ -40,14 +40,48 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
+	</array>	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>	<key>UIUserInterfaceStyle</key>
+	<string>Automatic</string>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDefault</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>UIPrerenderedIcon</key>
+	<false/>
+	<key>UIApplicationExitsOnSuspend</key>
+	<false/>	<key>UIRequiresFullScreen</key>
+	<false/>
+	<key>UISupportsDocumentBrowser</key>
+	<false/>
+	<key>UIFileSharingEnabled</key>
+	<false/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>		</dict>
+	</dict>
+	<key>UIAccessibilityEnabled</key>
+	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>background-processing</string>
+		<string>background-fetch</string>
+	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>DriftLuxury needs access to your location to suggest local experiences and activities</string>
+	<string>Drift needs access to your location to suggest local experiences and activities</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>DriftLuxury needs access to your location to suggest local experiences and activities</string>
+	<string>Drift needs access to your location to suggest local experiences and activities</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Drift needs access to your location to suggest local experiences and activities</string>
 </dict>
 </plist>

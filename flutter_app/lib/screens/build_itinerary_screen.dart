@@ -263,9 +263,8 @@ class _BuildItineraryScreenState extends State<BuildItineraryScreen> with Single
                             return Container(
                               margin: const EdgeInsets.only(left: 24),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: candidateData.isNotEmpty 
-                                    ? DriftTheme.gold.withOpacity(0.1)
+                                borderRadius: BorderRadius.circular(16),                                color: candidateData.isNotEmpty 
+                                    ? DriftTheme.gold.withValues(alpha: 0.1)
                                     : Colors.transparent,
                               ),
                               child: dayItems.isEmpty
@@ -422,7 +421,7 @@ class _BuildItineraryScreenState extends State<BuildItineraryScreen> with Single
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withValues(alpha: 0.2),
                         blurRadius: 8,
                         offset: const Offset(0, 4),
                       ),
@@ -504,13 +503,12 @@ class ItineraryItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        color: isDragging ? DriftTheme.gold.withOpacity(0.2) : DriftTheme.surface,
+      decoration: BoxDecoration(        color: isDragging ? DriftTheme.gold.withValues(alpha: 0.2) : DriftTheme.surface,
         borderRadius: BorderRadius.circular(12),
         boxShadow: isDragging
             ? [
                 BoxShadow(
-                  color: DriftTheme.gold.withOpacity(0.3),
+                  color: DriftTheme.gold.withValues(alpha: 0.3),
                   blurRadius: 8,
                   offset: const Offset(0, 4),
                 ),
@@ -622,13 +620,12 @@ class SavedItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        color: isDragging ? DriftTheme.gold.withOpacity(0.2) : DriftTheme.surfaceVariant,
+      decoration: BoxDecoration(        color: isDragging ? DriftTheme.gold.withValues(alpha: 0.2) : DriftTheme.surfaceVariant,
         borderRadius: BorderRadius.circular(12),
         boxShadow: isDragging
             ? [
                 BoxShadow(
-                  color: DriftTheme.gold.withOpacity(0.3),
+                  color: DriftTheme.gold.withValues(alpha: 0.3),
                   blurRadius: 8,
                   offset: const Offset(0, 4),
                 ),

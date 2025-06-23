@@ -24,10 +24,9 @@ class MemoryCardScreen extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         children: [
           Row(
-            children: [
-              Chip(label: const Text('Relaxed'), backgroundColor: DriftTheme.gold.withOpacity(0.2)),
+            children: [              Chip(label: const Text('Relaxed'), backgroundColor: DriftTheme.gold.withValues(alpha: 0.2)),
               const SizedBox(width: 8),
-              Chip(label: const Text('Romantic'), backgroundColor: DriftTheme.gold.withOpacity(0.2)),
+              Chip(label: const Text('Romantic'), backgroundColor: DriftTheme.gold.withValues(alpha: 0.2)),
             ],
           ),
           const SizedBox(height: 16),

@@ -387,7 +387,7 @@ class RecommendationCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withValues(alpha: 0.2),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -445,7 +445,7 @@ class RecommendationCard extends StatelessWidget {
                       (tag) => Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
-                          color: DriftTheme.surface.withOpacity(0.9),
+                          color: DriftTheme.surface.withValues(alpha: 0.9),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
@@ -471,7 +471,7 @@ class RecommendationCard extends StatelessWidget {
                     height: 36,
                     width: 36,
                     decoration: BoxDecoration(
-                      color: DriftTheme.surface.withOpacity(0.9),
+                      color: DriftTheme.surface.withValues(alpha: 0.9),
                       borderRadius: BorderRadius.circular(18),
                     ),
                     child: Icon(
@@ -576,7 +576,7 @@ class SaveOptionsOverlay extends StatelessWidget {
             height: 4,
             width: 40,
             decoration: BoxDecoration(
-              color: DriftTheme.textMuted.withOpacity(0.5),
+              color: DriftTheme.textMuted.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(2),
             ),
           ),

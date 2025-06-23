@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TripModeScreen extends StatefulWidget {
-  const TripModeScreen({Key? key}) : super(key: key);
+  const TripModeScreen({super.key});
 
   @override
   State<TripModeScreen> createState() => _TripModeScreenState();
@@ -103,12 +103,12 @@ class _TripModeScreenState extends State<TripModeScreen> with SingleTickerProvid
               onPressed: () {
                 // Handle search action
               },
-              child: const Text('Search'),
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
+              child: const Text('Search'),
             ),
           ),
         ],
@@ -206,8 +206,8 @@ class _TripModeScreenState extends State<TripModeScreen> with SingleTickerProvid
           leading: CircleAvatar(
             backgroundImage: NetworkImage('https://picsum.photos/200?random=$index'),
           ),
-          title: Text('Trip to Paris'),
-          subtitle: Text('June 15-22, 2023'),
+          title: const Text('Trip to Paris'),
+          subtitle: const Text('June 15-22, 2023'),
           trailing: const Icon(Icons.mood),
         );
       },
@@ -223,7 +223,7 @@ class _TripModeScreenState extends State<TripModeScreen> with SingleTickerProvid
             backgroundImage: NetworkImage('https://picsum.photos/200?random=${index + 10}'),
           ),
           title: Text('Dream Destination ${index + 1}'),
-          subtitle: Text('Planned for 2024'),
+          subtitle: const Text('Planned for 2024'),
           trailing: const Icon(Icons.favorite, color: Colors.red),
         );
       },

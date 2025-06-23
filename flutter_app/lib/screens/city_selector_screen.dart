@@ -93,9 +93,8 @@ class _CitySelectorScreenState extends State<CitySelectorScreen> with SingleTick
         desiredAccuracy: LocationAccuracy.high,
         timeLimit: const Duration(seconds: 15),
       );
-      
-      // Debug: Print coordinates to help identify if it's simulator location
-      print('Detected coordinates: ${position.latitude}, ${position.longitude}');
+        // Debug: Print coordinates to help identify if it's simulator location
+      debugPrint('Detected coordinates: ${position.latitude}, ${position.longitude}');
       
       // Check if this is likely a simulator location (Apple Park area)
       final isLikelySimulator = (position.latitude >= 37.3 && position.latitude <= 37.4) &&
@@ -121,7 +120,7 @@ class _CitySelectorScreenState extends State<CitySelectorScreen> with SingleTick
       }
       
     } catch (e) {
-      print('Location error: $e'); // For debugging
+      debugPrint('Location error: $e'); // For debugging
       
       // Check if this is a simulator-related issue
       if (e.toString().contains('simulator') || 
@@ -236,7 +235,7 @@ class _CitySelectorScreenState extends State<CitySelectorScreen> with SingleTick
           throw Exception('Failed to get location name from backup service');
         }
       } catch (e2) {
-        print('Geocoding error: $e2'); // For debugging
+        debugPrint('Geocoding error: $e2'); // For debugging
         _showError('Could not determine city name from your location. Please search manually.');
       }
     }
@@ -302,7 +301,7 @@ class _CitySelectorScreenState extends State<CitySelectorScreen> with SingleTick
                 height: 4,
                 width: 40,
                 decoration: BoxDecoration(
-                  color: DriftTheme.textMuted.withOpacity(0.5),
+                  color: DriftTheme.textMuted.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -419,10 +418,9 @@ class _CitySelectorScreenState extends State<CitySelectorScreen> with SingleTick
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                     iconSize: 20,
-                  ),
-                ),
+                  ),                ),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 12),
 
               // Title
               SlideTransition(
@@ -446,11 +444,10 @@ class _CitySelectorScreenState extends State<CitySelectorScreen> with SingleTick
                           color: DriftTheme.textPrimary,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Serif',
-                        ),
-                  ),
+                        ),                  ),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 20),
 
               // Search bar with location button
               SlideTransition(
@@ -514,10 +511,9 @@ class _CitySelectorScreenState extends State<CitySelectorScreen> with SingleTick
                         ),
                       ],
                     ),
-                  ),
-                ),
+                  ),                ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 20),
 
               // Section title
               SlideTransition(
@@ -639,11 +635,9 @@ class _CitySelectorScreenState extends State<CitySelectorScreen> with SingleTick
                           ),
                         ),
                       ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 32),
+                    );                  },
+                ),              ),
+              const SizedBox(height: 8),
 
               // Continue button
               SlideTransition(
@@ -661,37 +655,38 @@ class _CitySelectorScreenState extends State<CitySelectorScreen> with SingleTick
                     CurvedAnimation(
                       parent: _animationController,
                       curve: const Interval(0.6, 1.0, curve: Curves.easeOut),
-                    ),
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                      onPressed: selectedCity != null
-                          ? () => widget.onCitySelected(selectedCity!)
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: DriftTheme.gold,
-                        foregroundColor: Colors.black,
-                        disabledBackgroundColor: DriftTheme.gold.withOpacity(0.3),
-                        disabledForegroundColor: Colors.black45,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                    ),                  ),                  child: Container(
+                    padding: const EdgeInsets.only(bottom: 0),
+                    child: Center(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width > 600 ? 240 : 200,
+                        child: ElevatedButton(
+                        onPressed: selectedCity != null
+                            ? () => widget.onCitySelected(selectedCity!)
+                            : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: DriftTheme.gold,
+                          foregroundColor: Colors.black,
+                          disabledBackgroundColor: DriftTheme.gold.withValues(alpha: 0.3),
+                          disabledForegroundColor: Colors.black45,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                        ),
+                        child: Text(
+                          'Continue',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,                            color: selectedCity != null ? Colors.black : Colors.black45,
+                          ),
                         ),
                       ),
-                      child: Text(
-                        'Continue',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: selectedCity != null ? Colors.black : Colors.black45,
-                        ),
-                      ),
                     ),
-                  ),
-                ),
+                  ),                ),
               ),
+            ),
             ],
           ),
         ),

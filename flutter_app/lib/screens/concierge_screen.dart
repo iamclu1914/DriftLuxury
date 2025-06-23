@@ -14,7 +14,6 @@ class ConciergeScreen extends StatefulWidget {
 
 class _ConciergeScreenState extends State<ConciergeScreen> {
   final TextEditingController _controller = TextEditingController();
-  String? _lastRequest;
   bool _showRecommendations = false;
   bool _isLoading = false;
   String? _chatResponse;
@@ -33,7 +32,7 @@ class _ConciergeScreenState extends State<ConciergeScreen> {
                 children: [
                   CircleAvatar(
                     radius: 32,
-                    backgroundColor: DriftTheme.gold.withOpacity(0.2),
+                    backgroundColor: DriftTheme.gold.withValues(alpha: 0.2),
                     child: const Icon(Icons.support_agent, color: DriftTheme.gold, size: 36),
                   ),
                   const SizedBox(width: 16),
@@ -112,19 +111,15 @@ class _ConciergeScreenState extends State<ConciergeScreen> {
       ),
     );
   }
-
   void _handleQuickRequest(String request) {
     setState(() {
       _controller.text = request;
-      _lastRequest = request;
       _showRecommendations = true;
     });
     widget.onRequest?.call(request);
   }
-
   void _handleRequest(String request) async {
     setState(() {
-      _lastRequest = request;
       _showRecommendations = false;
       _isLoading = true;
       _chatResponse = null;

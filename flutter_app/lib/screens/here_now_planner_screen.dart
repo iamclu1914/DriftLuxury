@@ -63,7 +63,7 @@ class _HereNowPlannerScreenState extends State<HereNowPlannerScreen> {
         });
       }
     } catch (e) {
-      print("Error getting location: $e");
+      debugPrint("Error getting location: $e");
       // Fallback for simulator
       setState(() {
         _currentCity = 'Atlanta';
@@ -95,7 +95,7 @@ class _HereNowPlannerScreenState extends State<HereNowPlannerScreen> {
         });
       }
     } catch (e) {
-      print("Error getting weather: $e");
+      debugPrint("Error getting weather: $e");
       setState(() {
         _currentWeather = 'N/A';
       });
@@ -255,10 +255,9 @@ class _HereNowPlannerScreenState extends State<HereNowPlannerScreen> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
-            begin: Alignment.bottomRight,
-            colors: [
-              Colors.black.withOpacity(0.8),
-              Colors.black.withOpacity(0.2),
+            begin: Alignment.bottomRight,            colors: [
+              Colors.black.withValues(alpha: 0.8),
+              Colors.black.withValues(alpha: 0.2),
             ],
           ),
         ),
@@ -319,7 +318,7 @@ class _HereNowPlannerScreenState extends State<HereNowPlannerScreen> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withValues(alpha: 0.2),
             spreadRadius: 2,
             blurRadius: 10,
             offset: const Offset(0, 4),
@@ -375,9 +374,8 @@ class _HereNowPlannerScreenState extends State<HereNowPlannerScreen> {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  DriftTheme.gold.withOpacity(0.8),
+              gradient: LinearGradient(                colors: [
+                  DriftTheme.gold.withValues(alpha: 0.8),
                   DriftTheme.gold,
                 ],
                 begin: Alignment.topLeft,
@@ -386,7 +384,7 @@ class _HereNowPlannerScreenState extends State<HereNowPlannerScreen> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: DriftTheme.gold.withOpacity(0.3),
+                  color: DriftTheme.gold.withValues(alpha: 0.3),
                   blurRadius: 12,
                   spreadRadius: 0,
                   offset: const Offset(0, 4),
@@ -414,7 +412,7 @@ class _HereNowPlannerScreenState extends State<HereNowPlannerScreen> {
                       style: TextStyle(
                         fontFamily: 'Inter',
                         fontSize: 14,
-                        color: Colors.black.withOpacity(0.8),
+                        color: Colors.black.withValues(alpha: 0.8),
                       ),
                     ),
                   ],

@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../theme.dart';
+import 'itinerary_screen.dart';
 
 class MoodSelectorScreen extends StatefulWidget {
   final void Function(String mood) onMoodSelected;
@@ -19,13 +20,15 @@ class _MoodSelectorScreenState extends State<MoodSelectorScreen> with SingleTick
   String _currentLocation = 'Loading location...';
   String _greeting = 'Good day';
   bool _isLoading = true;
+  double? _latitude;
+  double? _longitude;
+  String _cityName = '';
   
   final List<Map<String, dynamic>> moods = [
+    {'name': 'Adventurous', 'icon': Icons.terrain, 'color': const Color(0xFF7EFF9C)},
     {'name': 'Relaxed', 'icon': Icons.spa, 'color': const Color(0xFF7EB6FF)},
     {'name': 'Romantic', 'icon': Icons.favorite, 'color': const Color(0xFFFF7E7E)},
-    {'name': 'Energized', 'icon': Icons.bolt, 'color': const Color(0xFFFFD700)},
-    {'name': 'Curious', 'icon': Icons.explore, 'color': const Color(0xFF9C7EFF)},
-    {'name': 'Adventurous', 'icon': Icons.terrain, 'color': const Color(0xFF7EFF9C)},
+    {'name': 'Social', 'icon': Icons.people, 'color': const Color(0xFFFFD700)},
   ];
 
   @override
@@ -84,9 +87,10 @@ class _MoodSelectorScreenState extends State<MoodSelectorScreen> with SingleTick
           _currentLocation = 'Location access denied';
         });
         return;
-      }
-
-      final position = await Geolocator.getCurrentPosition();
+      }      final position = await Geolocator.getCurrentPosition();
+      _latitude = position.latitude;
+      _longitude = position.longitude;
+      
       List<Placemark> placemarks = await placemarkFromCoordinates(
         position.latitude, 
         position.longitude
@@ -96,14 +100,36 @@ class _MoodSelectorScreenState extends State<MoodSelectorScreen> with SingleTick
         Placemark place = placemarks.first;
         final city = place.locality ?? place.subAdministrativeArea ?? 'Unknown City';
         final state = place.administrativeArea ?? '';
+        _cityName = city;
         setState(() {
           _currentLocation = state.isNotEmpty ? '$city, $state' : city;
         });
       }
     } catch (e) {
+      // Fallback for simulator
+      _latitude = 33.7490;
+      _longitude = -84.3880;
+      _cityName = 'Atlanta';
       setState(() {
-        _currentLocation = 'Atlanta, GA'; // Fallback for simulator
+        _currentLocation = 'Atlanta, GA';
       });
+    }
+  }
+  void _navigateToItinerary() {
+    if (selectedMood != null && _latitude != null && _longitude != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ItineraryScreen(
+            mood: selectedMood!,
+            cityName: _cityName.isNotEmpty ? _cityName : 'Current Location',
+            latitude: _latitude!,
+            longitude: _longitude!,
+          ),
+        ),
+      );
+      // Also call the original callback for any additional handling
+      widget.onMoodSelected(selectedMood!);
     }
   }
 
@@ -174,12 +200,10 @@ class _MoodSelectorScreenState extends State<MoodSelectorScreen> with SingleTick
                                   ),
                                 ),
                               ],
-                            ),
-                          ],
-                        ),
+                            ),                            ],                        ),
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 48),
                     SlideTransition(
                       position: Tween<Offset>(
                         begin: const Offset(0, -0.2),
@@ -193,19 +217,18 @@ class _MoodSelectorScreenState extends State<MoodSelectorScreen> with SingleTick
                           CurvedAnimation(
                             parent: _animationController,
                             curve: const Interval(0.2, 0.8, curve: Curves.easeOut),
-                          ),
-                        ),
-                        child: Text(
-                          'How are you feeling today?',
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                                color: DriftTheme.textPrimary,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Serif',
-                              ),
-                        ),
+                          ),                        ),                        child: Center(
+                          child: Text(
+                            'What\'s Your Vibe?',
+                            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                  color: DriftTheme.textPrimary,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Serif',
+                                ),
+                          ),                        ),
                       ),
                     ),
-                    const SizedBox(height: 60),
+                    const SizedBox(height: 32),
                     Expanded(
                       child: GridView.builder(
                         physics: const BouncingScrollPhysics(),
@@ -269,8 +292,7 @@ class _MoodSelectorScreenState extends State<MoodSelectorScreen> with SingleTick
                               },
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 300),
-                                decoration: BoxDecoration(
-                                  color: isSelected ? mood['color'].withOpacity(0.3) : DriftTheme.surface,
+                                decoration: BoxDecoration(                                  color: isSelected ? mood['color'].withValues(alpha: 0.3) : DriftTheme.surface,
                                   borderRadius: BorderRadius.circular(20),
                                   border: Border.all(
                                     color: isSelected ? mood['color'] : Colors.transparent,
@@ -278,7 +300,7 @@ class _MoodSelectorScreenState extends State<MoodSelectorScreen> with SingleTick
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: isSelected ? mood['color'].withOpacity(0.3) : Colors.black.withOpacity(0.1),
+                                      color: isSelected ? mood['color'].withValues(alpha: 0.3) : Colors.black.withValues(alpha: 0.1),
                                       blurRadius: 10,
                                       spreadRadius: 0,
                                       offset: const Offset(0, 5),
@@ -304,13 +326,11 @@ class _MoodSelectorScreenState extends State<MoodSelectorScreen> with SingleTick
                                     ),
                                   ],
                                 ),
-                              ),
-                            ),
-                          );
-                        },
+                              ),                            ),
+                          );                        },
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 8),
                     SlideTransition(
                       position: Tween<Offset>(
                         begin: const Offset(0, 0.5),
@@ -326,37 +346,37 @@ class _MoodSelectorScreenState extends State<MoodSelectorScreen> with SingleTick
                           CurvedAnimation(
                             parent: _animationController,
                             curve: const Interval(0.6, 1.0, curve: Curves.easeOut),
-                          ),
-                        ),
-                        child: SizedBox(
-                          width: double.infinity,
-                          height: 56,
-                          child: ElevatedButton(
-                            onPressed: selectedMood != null
-                                ? () => widget.onMoodSelected(selectedMood!)
-                                : null,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: DriftTheme.gold,
-                              foregroundColor: Colors.black,
-                              disabledBackgroundColor: DriftTheme.gold.withOpacity(0.3),
-                              disabledForegroundColor: Colors.black45,
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
+                          ),                        ),                        child: Container(
+                          padding: const EdgeInsets.only(bottom: 0),
+                          child: Center(
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width > 600 ? 240 : 200,
+                              child: ElevatedButton(                              onPressed: selectedMood != null && _latitude != null && _longitude != null
+                                  ? () => _navigateToItinerary()
+                                  : null,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: DriftTheme.gold,
+                                foregroundColor: Colors.black,
+                                disabledBackgroundColor: DriftTheme.gold.withValues(alpha: 0.3),
+                                disabledForegroundColor: Colors.black45,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                              ),
+                              child: Text(
+                                'Continue',                                style: TextStyle(
+                                  fontSize: 15, // Reduced from 16 for better proportion
+                                  fontWeight: FontWeight.w600,
+                                  color: selectedMood != null ? Colors.black : Colors.black45,
+                                ),
                               ),
                             ),
-                            child: Text(
-                              'Continue',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: selectedMood != null ? Colors.black : Colors.black45,
-                              ),
-                            ),
-                          ),
-                        ),
+                          ),                        ),
                       ),
                     ),
+                  ),
                   ],
                 ),
               ),
